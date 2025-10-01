@@ -1,0 +1,326 @@
+def is_not_valid(x):
+    """
+    Check if input contains any characters that are not letters or spaces
+    
+    Paramaters:
+    x (String): The input string being checked
+    
+    Returns:
+    Bool: True if string contains invalid characters, otherwise false
+    
+    Examples:
+    >>>is_not_valid('asfg123 asdf')
+    True
+    >>>is_not_valid('hello 82 monsters')
+    True
+    >>>is_not_valid('abjnrunfunfiken')
+    False
+
+    """
+    # Remove spaces and convert input to lower case
+    x = x.strip().lower()
+    
+    # Loop through each character in the string
+    for a in x: 
+        # Check if input only contains valid characters
+        if a not in 'abcdefghijklmnopqrstuvwxyz ':
+            return True
+    return False
+
+def is_not_square(x):
+    """
+    Checks if length of input string is a square number
+    
+    Paramaters:
+    x (String): The input string being checked
+    
+    Returns:
+    Bool: True if length is not square, false otherwise
+    
+    Examples:
+    >>>is_not_square('abc')
+    True
+    >>>is_not_square('seven monkeys')
+    True
+    >>>is_not_square('gbeg')
+    False
+
+    """
+    # Get string length
+    length = len(x)
+
+    # Return true if empty input
+    if length == 0: 
+        return True
+    
+    #Check if length is square
+    for i in range(length + 1):
+        if i * i == length:
+            return False
+
+    return True
+
+def horizontal_flip(square_list):
+    """
+    Flips a 2D square list horizontally
+    
+    Paramaters:
+    square_list (list): A 2D Square list
+    
+    Returns:
+    None: Just modifies the input list
+    
+    Examples:
+    >>>horizontal_flip([['B', 'I', 'H'], ['y', 'o', 'e'], ['e', ' ', 'l']])
+    [['H', 'I', 'B'], ['e', 'o', 'y'], ['l', ' ', 'e']]
+    
+    >>>horizontal_flip([['A', 'B', 'C'], ['D', 'E', 'F'], ['G', ' H', 'I']])
+    [['C', 'B', 'A'], ['F', 'E', 'D'], ['I', ' H', 'G']]
+    
+    >>>horizontal_flip([['H', 'E', 'L', 'L', 'O'],['B', 'O', 'S', 'S', '']])
+     [['E', 'H', 'L', 'L', 'O'], ['O', 'B', 'S', 'S', '']]
+    
+    """
+    
+    # Get size of 2D square list
+    size = len(square_list)
+    
+    # Loop through each row
+    for i in range(size):
+        # Swap row elements
+        for a in range(size // 2):
+            # Swap elements from left to right
+            square_list[i][a], square_list[i][size - 1 - a] = square_list[i][size - 1 - a], square_list[i][a]
+
+
+def transpose(input_list):
+    """
+    Transpose a 2D square list by swapping elements across the diagonal
+    
+    Paramaters:
+    input_list (list): 2D square list being transposed
+    
+    Returns:
+    None: Just modifies the input list
+    
+    Examples:
+    >>>input_list = [['H' , 'I' ,  'B' ] ,  ['e' ,  'o' ,  'y' ],  ['l' ,  '' ,  'e' ]]
+    >>>transpose(input_list)
+    >>>input_list
+    [['H', 'e', 'l'], ['I', 'o', ''], ['B', 'y', 'e']]
+    
+    >>>input_list = [['H' , 'E' ,  'Y' ] ,  ['F' ,  'R' ,  'I' ],  ['E' ,  'N' ,  'D' ]]
+    >>>transpose(input_list)
+    >>>input_list
+    [['H', 'F', 'E'], ['E', 'R', 'N'], ['Y', 'I', 'D']]
+    
+    >>>input_list = [['H' , 'A' ,  'Y' ] ,  ['O' ,  'R' ,  'O' ],  ['W' ,  'E' ,  'U' ]]
+    >>>transpose(input_list)
+    >>>input_list
+    [['H', 'O', 'W'], ['A', 'R', 'E'], ['Y', 'O', 'U']]
+
+    """
+    #Transpose by swapping elements diagonally
+    size = len(input_list)
+    for a in range(size):
+        for b in range(a + 1, size):
+            input_list[a][b], input_list[b][a] = input_list[b][a], input_list[a][b]
+
+def flip_list(square_list):
+    """
+    Flips a 2D square list by transposing it then flipping it horizontally
+    
+    Paramaters:
+    square_list (list): 2D square list
+    
+    Returns:
+    None: just modifies input list
+    
+    Examples:
+    >>>square_list = [['B', 'I', 'H'], ['y', 'o', 'e'], ['e', ' ', 'l']]
+    >>>square_flip(square_list)
+    >>>square_list
+    [['H', 'e', 'l'], ['I', 'o', ' '], ['B', 'y', 'e']]
+    
+    >>>square_list = [['e', 'T', 'I'], ['d', 'i', 'm'], ['', 'r', '']]
+    >>>horizontal_flip(square_list)
+    >>>square_list
+    [['I', 'm', ''], ['T', 'i', 'r'], ['e', 'd', '']]
+    
+    >>>square_list = [['h', 'N', 'I'], ['!', 'o', 'm'], ['!', 'a', '']]
+    >>>horizontal_flip(square_list)
+    >>>square_list
+    [['I', 'm', ''], ['N', 'o', 'a'], ['h', '!', '!']]
+    
+    """
+    # Horizontal flip
+    horizontal_flip(square_list)
+    
+    # Transpose list
+    transpose(square_list)
+    
+
+def string2list(n):
+    """
+    Converts a string of only letters and spaces into a 2D square list
+    
+    Paramaters:
+    a (String): The input string to convert
+    
+    Returns:
+    A list: A 2D square list if valid, empty list [] if not
+    
+    Examples:
+    >>>string2list('Hello Bye')
+    [ ’ H ’ ,  ’ e ’ ,  ’ l ’ ] ,  [ ’ l ’ ,  ’ o ’ ,  ’  ’ ] ,  [ ’ B ’ ,  ’ y ’ ,  ’ e ’ ]
+    
+    >>>string2list('five cats')
+    [['f', 'i', 'v'], ['e', ' ', 'c'], ['a', 't', 's']]
+    
+    >>>string2list('Yucky cat')
+    [['Y', 'u', 'c'], ['k', 'y', ' '], ['c', 'a', 't']]
+    
+    """
+    # Verify string constraints
+    length = len(n)
+    if length < 1 or length > 10000 or is_not_square(n) or is_not_valid(n) :
+        return []
+    
+    # Convert string to 2D square list
+    size = int(length ** 0.5)
+    result = []
+    start = 0
+    
+    # Filling the 2D list
+    while start < length:
+        row = []
+        end = start + size
+       
+        # Fill current row with characters until filled
+        while start < end:
+            row.append(n[start])
+            start += 1
+           
+        #Append completed row to list of results and return result
+        result.append(row)
+    return result
+       
+def add_space(text):
+    """
+    Adds a space before uppercase letters betwee two lowercase letetrs
+    
+    Paramaters:
+    Text (String): Input string of characters
+    
+    Returns:
+    String: Output string with spaces added
+    
+    Examples:
+    >>>add_space('HelloEveryone')
+    Hello Everyone
+    
+    >>>add_space('HeyGuysWhatsUp')
+    Hey Guys Whats Up
+    
+    
+    >>>add_space('soTiReDTODAy')
+    so Ti ReDTODAy
+    
+    """
+    # Check for invalid characters
+    if is_not_valid(text):
+        return "Invalid input, only alphabetic characters permitted"
+    
+    # Set up spacing
+    output_text = ""
+    previous_text = ""
+    current_text = ""
+    
+    #Loop through each character to verify constraints
+    for next_text in text:
+        if 'a' <= previous_text <= 'z' and 'A' <= current_text <= 'Z' and 'a' <= next_text <= 'z':
+            # Add space between chartacters
+            output_text += " "
+            
+        # Add character to output and move forward to next text
+        output_text += current_text
+        previous_text = current_text
+        current_text = next_text
+        
+    # Add last text    
+    output_text += current_text
+    
+    return output_text
+    
+    
+def list2string(text_list):
+    """
+    Convert a 2D list of text into a string
+    
+    Paramaters:
+    Text_list (list): A 2D list of text
+    
+    Returns:
+    String: String from the 2D list
+    
+    Examples:
+    >>>list2string([['H', 'e', 'l'], ['l', 'o', 'o'], ['B', 'y', 'e']])
+    Helloo Bye
+    
+    >>>list2string([['G', 'a', 'm'], ['e', 'I', 's'], ['F', 'u', 'n']])
+    Game Is Fun
+    
+    >>>list2string([['I', 'm', 'N'], ['o', 't', 'T'], ['i', 'R', 'E', 'd']])
+    Im Not TiREd
+    
+    """
+    output_text = ""
+    
+    # Loop through each row in 2D list
+    for row in text_list:
+        # Loop through each text/ character in row and add text to output
+        for text in row:
+            output_text += text
+    
+    # Call add_space as needed 
+    return add_space(output_text)
+
+def decipher_code(text):
+    """
+    Parammaters:
+    text (string): Input text to decipher
+    
+    Returns:
+    String: String with deciphered text
+    
+    Examples: 
+    >>>decipher_code('ttuoYrAtwoinLAundibKgSson.roelf ad YfImPAoitmr ucIeoGAisrgoraO')
+    You Know About List And String. It Is Official You Are A Good Programmer
+    
+    >>>decipher_code(
+    
+    >>>decipher_code(
+    
+    """
+    # Split text by periods and store
+    phrases = text.split('.')
+    deciphered_phrases = []
+    
+    # Process each phrase if not empty
+    for phrase in phrases:
+        if phrase.strip() and not is_not_valid(phrase.strip()):
+            # Convert to 2D list
+            square_list = string2list(phrase.strip())
+            
+            # Flip list if valid & convert to string
+            if square_list:
+                flip_list(square_list)
+                deciphered_phrase = list2string(square_list)
+                deciphered_phrases.append(deciphered_phrase)
+                
+    # Join deciphered phrases into final string
+    return '.'.join(deciphered_phrases)
+
+
+print(decipher_code(' lH oe  l'))
+
